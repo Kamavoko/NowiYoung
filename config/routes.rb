@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :shops do
     resources :comments, only: [:create, :destroy]
+    resources :photos, only: [:create, :destroy]
     collection do
      get 'search'
    end

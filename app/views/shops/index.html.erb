@@ -72,7 +72,7 @@
     <!-- 画像挿入位置 -->
     <td>
     <% if shop.image? %>
-      <%= image_tag shop.image_url.to_s %>
+      <%= image_tag shop.image.thumb.url %>
     <% else %>
       <%= image_tag 'a.png' %>
     <% end %>
