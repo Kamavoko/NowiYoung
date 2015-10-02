@@ -10,7 +10,7 @@
   <!--for みたいなもの-->
   <tr>
     <!-- categoryのままだとクラスが表示される-->
-    <td><%= @shop.category.name %></td>
+    <td><%= @shop.category.name  if @shop.category.present? %></td>
     <td><%= @shop.address %></td>
     <td>    <% if @shop.image? %>
 　　<%= image_tag @shop.image.thumb.url %>
@@ -21,4 +21,17 @@
     <td><a href="http://tabelog.com/" target="_blank">予約する</a></td>
   </tr>
 </table>
+
+<ul>
+<!-- コメント表示欄 -->
+  <% @shop.comments.each do |comment| %>
+  <li><%= comment.text %> by <%= comment.user_id %></li>
+  <% end %>
+  <li>
+    <%= form_for [@shop, @shop.comments.build] do |f| %>
+    <%= f.text_field :text %>
+    <%= f.submit %>
+    <% end %>
+  </li>
+</ul>
 <%= link_to "Home" , "/shops" %>
