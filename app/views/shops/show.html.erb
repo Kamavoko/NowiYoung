@@ -1,0 +1,24 @@
+<h1><%= @shop.name %></h1>
+
+<table class='table table-striped table-bordered'>
+  <tr>
+    <th>ジャンル</th>
+    <th>エリア</th><!--この行を修正-->
+    <th>画像</th>
+    <th>ホームページ</th>
+  </tr>
+  <!--for みたいなもの-->
+  <tr>
+    <!-- categoryのままだとクラスが表示される-->
+    <td><%= @shop.category.name %></td>
+    <td><%= @shop.address %></td>
+    <td>    <% if @shop.image? %>
+　　<%= image_tag @shop.image.thumb.url %>
+　<% else %>
+　　<%= image_tag 'a.png' %>
+　<% end %></td>
+    <td><a href="<%= @shop.homepage %>">HP</a></td>
+    <td><a href="http://tabelog.com/" target="_blank">予約する</a></td>
+  </tr>
+</table>
+<%= link_to "Home" , "/shops" %>

@@ -1,0 +1,91 @@
+<div class="form-horizontal center-block" role="form">
+
+<%= form_for @shop do |f| %>
+  <div class="form-group">
+    <label class="control-label col-sm-2">
+      <%= f.label :店名 %>：
+    </label>
+    <div class="col-sm-4">
+      <%= f.text_field :name %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2">
+      <%= f.label :カテゴリー %>：
+    </label>
+    <div class="col-sm-4">
+      <!-- カテゴリーDBから持ってくる-->
+      <%= f.collection_select :category_id, Category.all, :id, :name %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2">
+      <%= f.label :経度 %>：
+    </label>
+    <div class="col-sm-4">
+      <%= f.text_field :longitude %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2">
+      <%= f.label :緯度 %>：
+    </label>
+    <div class="col-sm-4">
+      <%= f.text_field :latitude %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2">
+      <%= f.label :住所 %>：
+    </label>
+    <div class="col-sm-4">
+      <%= f.text_field :address %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2">
+      <%= f.label :ホームページ %>：
+    </label>
+    <div class="col-sm-4">
+      <%= f.text_field :homepage %>
+    </div>
+  </div>
+  <!-- 画像挿入位置？ -->
+<!--  <div class="form-group">
+    <label class="control-label col-sm-2">
+      <%= f.label :name %>
+    </label>
+    <div class="col-sm-4">
+      <%= f.file_field :name %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2">
+  　　<%= f.label :description %>
+    </label>
+    <div class="col-sm-4">
+  　　<%= f.file_field :description %>
+    </div>
+  </div>
+-->  <div class="form-group">
+    <label class="control-label col-sm-2">
+  　　<%= f.label :image %>
+    </label>
+    <div class="col-sm-4">
+  　　<%= f.file_field :image %>
+    </div>
+  </div>
+
+
+  <!-- 文字列が空か？ -->
+  <% if @shop.errors.any? %>
+  <!-- エラーメッセージの表示 -->
+  <%= @shop.errors.messages[:title][0] %>
+  <% end %>
+  <div class="form-group">
+    <div class="col-sm-4">
+      <%= f.submit '登録' , class: 'btn btn-primary'%>
+    </div>
+  </div>
+  <% end %>
+</div>

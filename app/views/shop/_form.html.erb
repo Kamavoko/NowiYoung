@@ -1,0 +1,30 @@
+<%= form_for @shop do |f| %>
+<p>
+  <%= f.label :店名 %>：
+  <%= f.text_field :name %>
+  <br/>
+  <%= f.label :カテゴリー %>：
+  <%= f.text_field :category %>
+  <br/>
+  <%= f.label :経度 %>：
+  <%= f.text_field :longitude %>
+  <br/>
+  <%= f.label :緯度 %>：
+  <%= f.text_field :latitude %>
+  <br/>
+  <%= f.label :住所 %>：
+  <%= f.text_field :address %>
+  <br/>
+  <%= f.label :ホームページ %>：
+  <%= f.text_field :homepage %>
+  <br/>
+  <!-- 文字列が空か？ -->
+  <% if @shop.errors.any? %>
+  <!-- エラーメッセージの表示 -->
+  <%= @shop.errors.messages[:title][0] %>
+  <% end %>
+</p>
+<p>ボタン：
+  <%= f.submit %>
+</p>
+<% end %>

@@ -1,0 +1,16 @@
+<h1>検索するドン</h1>
+<p>Find me in app/views/shop/search.html.erb</p>
+
+<h1>Listing topics</h1>
+<%= search_form_for @search do |f| %>
+  <%= f.label :name_cont, 'タイトル' %>
+  <%= f.text_field :name_cont %>
+  <!--ここから追加-->
+  <div>
+    <%= f.submit '検索する' %>
+  </div>
+<% end %>
+
+<% @shops.each do |s| %>
+  <%= s.name %>
+<% end %>
