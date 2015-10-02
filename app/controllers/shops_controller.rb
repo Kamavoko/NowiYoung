@@ -26,7 +26,7 @@ class ShopsController < ApplicationController
   def create
     @shop = Shop.new(shop_params)
     #保存条件を満たさなかったらページに残る
-    binding.pry
+    #binding.pry
     if @shop.save
       redirect_to shops_path
     else
