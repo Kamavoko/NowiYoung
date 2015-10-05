@@ -20,25 +20,27 @@ ActiveRecord::Schema.define(version: 20151002082305) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "shop_id"
     t.string   "text"
+    t.integer  "shop_id"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   add_index "comments", ["shop_id"], name: "index_comments_on_shop_id"
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
   create_table "photos", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "shop_id"
     t.string   "image"
     t.string   "desc"
+    t.integer  "shop_id"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   add_index "photos", ["shop_id"], name: "index_photos_on_shop_id"
+  add_index "photos", ["user_id"], name: "index_photos_on_user_id"
 
   create_table "shops", force: :cascade do |t|
     t.string   "name"
@@ -47,9 +49,9 @@ ActiveRecord::Schema.define(version: 20151002082305) do
     t.float    "latitude"
     t.string   "address"
     t.string   "homepage"
+    t.string   "image"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.string   "image"
   end
 
   add_index "shops", ["category_id"], name: "index_shops_on_category_id"

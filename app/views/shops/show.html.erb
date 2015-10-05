@@ -43,6 +43,7 @@
         <%= form_for [@shop, @shop.photos.build] do |f| %>
         画像を選択<%= f.file_field :image %>
         コメント<%= f.text_field :desc %>
+        <%= f.hidden_field :shop_id %>
         <%= f.submit %>
       </li>
       <% end %>
@@ -57,6 +58,7 @@
       <li>
         <%= form_for [@shop, @shop.comments.build] do |f| %>
         <%= f.text_field :text , class: "form-control"%>
+        <%= f.hidden_field :shop_id %>
         <%= f.submit "コメント投稿", class: "btn btn-large btn-primary" %>
         <% end %>
       </li>

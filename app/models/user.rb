@@ -1,13 +1,18 @@
 class User < ActiveRecord::Base
 
-#  has_many comment
-#  has_many photo
+  has_many :comments
+  has_many :photos
 
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :trackable, :validatable,
         #  :confirmable,
         :lockable, :timeoutable, :omniauthable, omniauth_providers: [:twitter]
 
+  # providerがある場合（Twitter経由で認証した）は、
+  # passwordは要求しないようにする。
+  def password_required?
+   super && provider.blank?
+  end
   def self.from_omniauth(auth)
      where(provider: auth['provider'], uid: auth['uid']).first_or_create do |user|
        user.provider = auth['provider']
