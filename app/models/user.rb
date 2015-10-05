@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :trackable, :validatable,
-        #  :confirmable,
+         :confirmable,
         :lockable, :timeoutable, :omniauthable, omniauth_providers: [:twitter]
 
   # providerがある場合（Twitter経由で認証した）は、

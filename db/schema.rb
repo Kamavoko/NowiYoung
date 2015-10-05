@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20151002082305) do
     t.string   "address"
     t.string   "homepage"
     t.string   "image"
+    t.string   "desc"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end

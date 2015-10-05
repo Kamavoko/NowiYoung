@@ -8,6 +8,7 @@ class CreateShops < ActiveRecord::Migration
       t.string :address
       t.string :homepage
       t.string :image
+      t.string :desc
 
       t.timestamps null: false
     end
