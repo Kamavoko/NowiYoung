@@ -3,20 +3,24 @@ class ShopsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
   def index
+    #検索結果に合うものだけを表示
     @search = Shop.search(params[:q])
     @shops = @search.result
-    # @hash = Gmaps4rails.build_markers(@shops) do |shop, marker|
-    #   marker.lat shop.latitude
-    #   marker.lng shop.longitude
-    #   marker.infowindow shop.description
-    #   marker.json({title: shop.title})
-    #       end
-    #     end
-    #   end
+    @hash = Gmaps4rails.build_markers(@shops) do |shop, marker|
+       marker.lat shop.latitude
+       marker.lng shop.longitude
+       marker.infowindow shop.desc
+       marker.json({title: shop.name})
+    end
   end
-
   def show
   #  @shop = Shop.all
+    @hash = Gmaps4rails.build_markers(@shop) do |shop, marker|
+     marker.lat shop.latitude
+     marker.lng shop.longitude
+     marker.infowindow shop.name
+     marker.json({title: shop.name})
+   end
   end
   def new
     @shop = Shop.new
@@ -58,7 +62,7 @@ class ShopsController < ApplicationController
   private
   def shop_params
     # 受け渡すパワメータと一致するのを確認
-    params[:shop].permit(:name,:category_id,:longitude,:latitude, :address,:homepage,:image  )
+    params[:shop].permit(:name,:category_id,:longitude,:latitude,:desc, :address,:homepage,:image  )
   #  params.require(:shop).permit(:name, :description, :image)
   end
   def set_project
