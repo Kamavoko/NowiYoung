@@ -18,31 +18,39 @@
       <!--for みたいなもの-->
       <tr>
         <!-- categoryのままだとクラスが表示される-->
-        <td><%= @shop.category.name  if @shop.category.present? %></td>
-        <td><%= @shop.address %></td>
-        <td>    <% if @shop.image? %>
-    　　<%= image_tag @shop.image.thumb.url %>
-    　<% else %>
-    　　<%= image_tag 'a.png' %>
-    　<% end %></td>
-        <td><a href="<%= @shop.homepage %>">HP</a></td>
-        <td><a href="http://tabelog.com/" target="_blank">予約する</a></td>
+        <td>
+          <%= @shop.category.name  if @shop.category.present? %>
+        </td>
+        <td>
+          <%= @shop.address %>
+        </td>
+        <td>
+          <% if @shop.image? %>
+    　　   <%= image_tag @shop.image.thumb.url %>
+    　   <% else %>
+    　　  <%= image_tag 'a.png' %>
+    　   <% end %>
+        </td>
+        <td>
+          <a href="<%= @shop.homepage %>">HP</a>
+        </td>
+        <td>
+          <a href="http://tabelog.com/" target="_blank">予約する</a>
+        </td>
       </tr>
     </table>
     <div style='width: 800px;'>
       <div id="map" style='width: 800px; height: 400px;'></div>
     </div>
 
-    <script type="text/javascript">
-        handler = Gmaps.build('Google');
-        handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-          markers = handler.addMarkers(<%=raw @hash.to_json %>);
-          handler.bounds.extendWith(markers);
-          handler.fitMapToBounds();
-        });
+   <script type="text/javascript">
+      handler = Gmaps.build("Google" );
+      handler.buildMap({ internal: { id: "map" } }, function() {
+        markers = handler.addMarkers(<%=raw @hash.to_json %>);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+      });
     </script>
-
-
   </div>
   <div class="tab-pane" id="about">
     <ul>

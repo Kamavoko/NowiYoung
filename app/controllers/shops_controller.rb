@@ -10,18 +10,28 @@ class ShopsController < ApplicationController
        marker.lat shop.latitude
        marker.lng shop.longitude
        marker.infowindow shop.desc
-       marker.json({title: shop.name})
+       marker.json({title: shop.name, icon: '/images/a.png'})
     end
   end
   def show
-  #  @shop = Shop.all
-    @hash = Gmaps4rails.build_markers(@shop) do |shop, marker|
-     marker.lat shop.latitude
-     marker.lng shop.longitude
-     marker.infowindow shop.name
-     marker.json({title: shop.name})
-   end
+    #  @shop = Shop.all
+    # @hash = Gmaps4rails.build_markers(@shop) do |shop, marker|
+    #   marker.lat shop.latitude
+    #   marker.lng shop.longitude
+    #   marker.picture({
+    #                   :anchor => [32, 32],
+    #                   :url    => "http://www.tyto-style.com/imgfiles/images/matters/icon/080713icons/blue32_q.png",
+    #                   :width  => "32",
+    #                   :height => "32"
+    #
+    #   })
+    #   marker.infowindow shop.desc
+    #   #  marker.infowindow render_to_string(:partial => "/users/my_template", :locals => { :object => user}).gsub(/\n/, '').gsub(/"/, '\"')
+    #   #marker.title   "i'm the title"
+    #   marker.json({title: shop.name})
+    #  end
   end
+
   def new
     @shop = Shop.new
   end
@@ -62,7 +72,7 @@ class ShopsController < ApplicationController
   private
   def shop_params
     # 受け渡すパワメータと一致するのを確認
-    params[:shop].permit(:name,:category_id,:longitude,:latitude,:desc, :address,:homepage,:image  )
+    params[:shop].permit(:name, :category_id, :longitude, :latitude, :desc, :address, :homepage, :image, tag_ids:[] )
   #  params.require(:shop).permit(:name, :description, :image)
   end
   def set_project
