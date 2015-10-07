@@ -9,6 +9,13 @@ class PhotosController < ApplicationController
       redirect_to shop_path(@photo.shop.id)
     end
 
+    def destroy
+        @photo = Photo.find(params[:id])
+        # 認証してないと消せない
+        authorize! :destroy, @photo
+        @photo.destroy
+        redirect_to shop_path(params[:shop_id])
+      end
 
     #ショップ情報の取得
     # @shop = Shop.find(params[:shop_id])

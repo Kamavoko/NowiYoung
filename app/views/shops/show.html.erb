@@ -3,7 +3,6 @@
 <ul class="nav nav-tabs" style="margin-bottom:15px">
   <li class="active"><a href="#home" data-toggle="tab">データ</a></li>
   <li><a href="#about" data-toggle="tab">イメージ</a></li>
-  <li><a href="#hoge" data-toggle="tab">コメント</a></li>
 </ul>
 
 <div class="tab-content">
@@ -39,29 +38,38 @@
         </td>
       </tr>
     </table>
-    <div style='width: 800px;'>
-      <div id="map" style='width: 800px; height: 400px;'></div>
-    </div>
-
-   <script type="text/javascript">
-      handler = Gmaps.build("Google" );
-      handler.buildMap({ internal: { id: "map" } }, function() {
-        markers = handler.addMarkers(<%=raw @hash.to_json %>);
-        handler.bounds.extendWith(markers);
-        handler.fitMapToBounds();
-      });
-    </script>
+    <ul>
+      <!-- コメント表示欄 -->
+      <% @shop.comments.each do |comment| %>
+        <li><%= comment.text %> by <%= comment.user.username %>
+        <!-- cancancanで消せるか？comment=インスタンス-->
+        <% if can? :destroy, comment %>
+            <%= link_to "[Delete]", shop_comment_path(comment.shop_id, comment.id), method: :delete, data: {confirm: "は？"} %>
+            <% end %>
+        <% end %>
+        </li>
+    </ul>
+        <%= form_for [@shop, @shop.comments.build] do |f| %>
+        <%= f.text_field :text , class: "form-control"%>
+        <%= f.hidden_field :shop_id %>
+        <%= f.submit "コメント投稿", class: "btn btn-large btn-primary" %>
+        <% end %>
   </div>
+
+
   <div class="tab-pane" id="about">
     <ul>
       <!-- 画像表示欄 -->
       <% @shop.photos.each do |photo| %>
       <li>
-
         <%= image_tag photo.image_url.to_s %><br/>
         <%= photo.desc if photo.desc.present? %> by <%= photo.user.username %></li>
-      <% end %>
-      <li>
+        <!-- cancancanで消せるか？photo=インスタンス-->
+        <% if can? :destroy, photo %>
+          <%= link_to "[Delete]", shop_photo_path(photo.shop_id, photo.id), method: :delete, data: {confirm: "は？"} %>
+          <% end %>
+        <% end %>
+          <li>
         <%= form_for [@shop, @shop.photos.build] do |f| %>
         画像を選択<%= f.file_field :image %>
         コメント<%= f.text_field :desc %>
@@ -69,21 +77,6 @@
         <%= f.submit %>
       </li>
       <% end %>
-    </ul>
-  </div>
-  <div class="tab-pane" id="hoge">
-    <ul>
-    <!-- コメント表示欄 -->
-      <% @shop.comments.each do |comment| %>
-        <li><%= comment.text %> by <%= comment.user.username %></li>
-      <% end %>
-      <li>
-        <%= form_for [@shop, @shop.comments.build] do |f| %>
-        <%= f.text_field :text , class: "form-control"%>
-        <%= f.hidden_field :shop_id %>
-        <%= f.submit "コメント投稿", class: "btn btn-large btn-primary" %>
-        <% end %>
-      </li>
     </ul>
   </div>
 </div>

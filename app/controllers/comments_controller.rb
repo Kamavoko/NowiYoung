@@ -19,7 +19,14 @@ class CommentsController < ApplicationController
     end
   end
 
+  def destroy
+      @comment = Comment.find(params[:id])
+      # 認証してないと消せない
+      authorize! :destroy, @comment
 
+      @comment.destroy
+      redirect_to shop_path(params[:shop_id])
+    end
 
 
   #指定したフォーマット以外を弾く

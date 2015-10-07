@@ -1,6 +1,7 @@
 class ShopsController < ApplicationController
 
   before_action :set_project, only: [:show, :edit, :update, :destroy]
+  #  before_action :authenticate_user!, :except => [:show, :index]  
 
   def index
     #検索結果に合うものだけを表示
