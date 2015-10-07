@@ -5,7 +5,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     if @user.persisted?
       flash.notice = 'ログインしました！'
       @user.save
-      @user.confirm!
+  #    @user.confirm!
       sign_in @user
       redirect_to root_path
     else

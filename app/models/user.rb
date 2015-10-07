@@ -2,12 +2,17 @@ class User < ActiveRecord::Base
 
   has_many :comments
   has_many :photos
+  has_and_belongs_to_many :roles
 
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :trackable, :validatable,
-         :confirmable,
+    #     :confirmable,
         :lockable, :timeoutable, :omniauthable, omniauth_providers: [:twitter]
 
+  def has_role?(name)
+    self.roles.where(name: name).length > 0
+  end
+  #      attr_accessible :name, :role
   # providerがある場合（Twitter経由で認証した）は、
   # passwordは要求しないようにする。
   def password_required?
