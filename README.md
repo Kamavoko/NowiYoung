@@ -1,2 +1,5 @@
 # NowiYoung
-(　³ω³ )
+
+
+Young
+(　³ω³ )　＜あたまYoungなったよ〜
