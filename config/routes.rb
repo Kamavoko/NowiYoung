@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :shops
+    resources :comments
   end
 
   devise_for :users, controllers: { :omniauth_callbacks => "omniauth_callbacks" }

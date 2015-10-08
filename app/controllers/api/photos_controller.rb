@@ -4,17 +4,18 @@ class Api::PhotosController < Api::ApplicationController
     #@shop = Shop.find(params[:id])
     @photo = Photo.new(photo_params)
     if @photo.save
-      redirect_to shop_path(@photo.shop.id)
+      render json: @photo, status: :created, location: @photo
     else
-      redirect_to shop_path(@photo.shop.id)
+      render json: @photo.errors, status: :unprocessable_entity
     end
+  end
 
     def destroy
         @photo = Photo.find(params[:id])
         # 認証してないと消せない
         authorize! :destroy, @photo
         @photo.destroy
-        redirect_to shop_path(params[:shop_id])
+        head :no_content
       end
 
     #ショップ情報の取得

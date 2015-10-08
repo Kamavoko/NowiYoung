@@ -68,7 +68,7 @@ class Api::ShopsController < Api::ApplicationController
     #   render 'edit'
       head :no_content
     else
-      render json: @task.errors, status: :unprocessable_entity
+      render json: @shop.errors, status: :unprocessable_entity
     end
   end
 

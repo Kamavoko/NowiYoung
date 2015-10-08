@@ -13,9 +13,9 @@ class Api::CommentsController < Api::ApplicationController
   #  @shop = Shop.find(params[:id])
     @comment = Comment.new(comment_params)
     if @comment.save
-      redirect_to shop_path(@comment.shop.id)
+      render json: @comment
     else
-      redirect_to shop_path(@comment.shop.id)
+      render json: @comment.errors
     end
   end
 
@@ -25,15 +25,15 @@ class Api::CommentsController < Api::ApplicationController
       authorize! :destroy, @comment
 
       @comment.destroy
-      redirect_to shop_path(params[:shop_id])
-    end
+      head :no_content
+  end
 
 
   #指定したフォーマット以外を弾く
   private
   def comment_params
     # 受け渡すパワメータと一致するのを確認
-    params.require(:comment).permit(:shop_id, :text ).merge(user_id: current_user.id)
+    params.require(:comment).permit(:shop_id, :text ).merge(user_id: 1)
     # params.require(:comment).permit(:name, :description, :image)
   end
   def set_project
