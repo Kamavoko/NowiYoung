@@ -7,6 +7,11 @@ Rails.application.routes.draw do
      get 'search'
    end
   end
+
+  namespace :api do
+    resources :shops
+  end
+
   devise_for :users, controllers: { :omniauth_callbacks => "omniauth_callbacks" }
   root 'pages#index'
   get 'pages/show'

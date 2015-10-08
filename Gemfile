@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.2.4'
-gem 'sqlite3'
+#gem 'sqlite3'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
@@ -33,6 +33,14 @@ gem 'autoprefixer-rails'
 gem 'carrierwave'
 gem 'rmagick'
 
+#rails-api
+gem 'rails-api'
+
+#heroku
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
+end
 group :development, :test do
   gem 'pry-rails'
   gem 'pry-stack_explorer'
@@ -44,3 +52,10 @@ group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
 end
+
+group :development do
+  gem 'sqlite3'
+end
+# group :production do
+#   gem 'pg'
+# end
