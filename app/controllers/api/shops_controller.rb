@@ -1,4 +1,4 @@
-class ShopsController < ApplicationController
+class Api::ShopsController < Api::ApplicationController
 
 
   before_action :set_project, only: [:show, :edit, :update, :destroy]

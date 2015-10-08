@@ -1,4 +1,4 @@
-class PhotosController < ApplicationController
+class Api::PhotosController < Api::ApplicationController
   #作成中
   def create
     #@shop = Shop.find(params[:id])

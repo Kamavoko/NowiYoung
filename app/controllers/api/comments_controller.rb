@@ -1,4 +1,4 @@
-class CommentsController < ApplicationController
+class Api::CommentsController < Api::ApplicationController
   #作成中
   def create
     #ショップ情報の取得

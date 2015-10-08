@@ -1,4 +1,4 @@
-class ShopTagsController < ApplicationController
+class Api::ShopTagsController < Api::ApplicationController
   before_action :set_shop_tag, only: [:show, :edit, :update, :destroy]
 
   # GET /shop_tags
